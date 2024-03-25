@@ -1,6 +1,6 @@
 {
-    "name": "taco",
-    "short_name": "taco",
+    "name": "Taco",
+    "short_name": "Taco",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

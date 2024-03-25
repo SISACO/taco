@@ -1,4 +1,4 @@
-package com.example.taco
+package com.example.Taco
 
 import io.flutter.embedding.android.FlutterActivity
 

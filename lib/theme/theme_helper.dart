@@ -1,22 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:taco/utils/size_utils.dart';
+import 'package:Taco/utils/size_utils.dart';
 
 String _appTheme = "primary";
 
-
 //Usage   backgroundColor: appTheme.indigo400,
-
 
 //texttheme usage theme.textTheme.titleMedium!
 
-
-
-
-
-
 class ThemeHelper {
- 
   Map<String, PrimaryColors> _supportedCustomColor = {
     'primary': PrimaryColors()
   };
