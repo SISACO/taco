@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:Taco/utils/size_utils.dart';
 
 
-import 'package:flutter/material.dart';
-
 class ThemeConfig {
   //Colors for theme
   static Color lightPrimary = Color(0xfffcfcff);
