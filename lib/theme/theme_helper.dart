@@ -1,7 +1,77 @@
-import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:Taco/utils/size_utils.dart';
 
+
+import 'package:flutter/material.dart';
+
+class ThemeConfig {
+  //Colors for theme
+  static Color lightPrimary = Color(0xfffcfcff);
+  static Color darkPrimary = Color(0x0f0e0c);
+  static Color lightAccent = Color(0XFF4782AA);
+  static Color darkAccent = Color(0XFF4782AA);
+  static Color lightBG = Color(0xfffcfcff);
+  static Color darkBG = Color(0xff121212);
+  static Color badgeColor = Colors.red;
+
+  static ThemeData lightTheme = ThemeData(
+    primaryColor: lightPrimary,
+    scaffoldBackgroundColor: lightBG,
+    appBarTheme: AppBarTheme(
+      backgroundColor: lightBG,
+      elevation: 0,
+      toolbarTextStyle: TextTheme(
+        titleLarge: TextStyle(
+          color: darkBG,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ).bodyMedium,
+      titleTextStyle: TextTheme(
+        titleLarge: TextStyle(
+          color: darkBG,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ).titleLarge,
+    ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: lightAccent,
+      background: lightBG,
+      brightness: Brightness.light,
+    ),
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: darkPrimary,
+    scaffoldBackgroundColor: darkBG,
+    appBarTheme: AppBarTheme(
+      backgroundColor: darkBG,
+      elevation: 0,
+      toolbarTextStyle: TextTheme(
+        titleLarge: TextStyle(
+          color: lightBG,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ).bodyMedium,
+      titleTextStyle: TextTheme(
+        titleLarge: TextStyle(
+          color: lightBG,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ).titleLarge,
+    ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: darkAccent,
+      background: darkBG,
+      brightness: Brightness.dark,
+    ),
+  );
+}
 String _appTheme = "primary";
 
 //Usage   backgroundColor: appTheme.indigo400,
@@ -133,6 +203,9 @@ class PrimaryColors {
   // White
   Color get whiteA700 => Color(0XFFFFFFFF);
 }
+
+
+
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();
 ThemeData get theme => ThemeHelper().themeData();
