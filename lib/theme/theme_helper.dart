@@ -187,19 +187,20 @@ class PrimaryColors {
   Color get black900 => Color(0XFF000000);
 
   // BlueAf
-  Color get blue200Af => Color(0XAF91C9E4);
-
+  Color get blue200Af => Color.fromARGB(255, 145, 200, 228);
+  Color get bluebox => Color.fromARGB(101, 145, 200, 228);
   // Gray
-  Color get gray5099 => Color(0X99FFFAFA);
-
+  Color get gray5099 => Color.fromARGB(255, 214, 214, 214);
   // Indigo
   Color get indigo400 => Color(0XFF4782AA);
+
 
   // LightGreen
   Color get lightGreen50 => Color(0XFFF7F4EB);
 
   // White
   Color get whiteA700 => Color(0XFFFFFFFF);
+  Color get BlackTrans => Color.fromARGB(144, 0, 0, 0);
 }
 
 
