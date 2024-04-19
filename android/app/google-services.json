@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "848230535804",
+    "project_id": "taco-2024",
+    "storage_bucket": "taco-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848230535804:android:dd55bf8a0a17fe36766ff9",
+        "android_client_info": {
+          "package_name": "com.example.Taco"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBYmpHRqDtt1mIm6USyES0MPCjVdtIpn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
