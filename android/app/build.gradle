@@ -29,6 +29,9 @@ android {
     namespace "com.example.Taco"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    defaultConfig {
+        minSdkVersion 20
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
