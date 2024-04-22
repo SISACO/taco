@@ -1,5 +1,4 @@
 import 'package:Taco/theme/theme_helper.dart';
-import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

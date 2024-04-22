@@ -3,8 +3,10 @@ import 'package:Taco/reuse/textform.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Error.dart';
 import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Success.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -16,24 +18,23 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _username = TextEditingController();
+  final TextEditingController _emailusername = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final double gap = 28;
 
   bool _hideText = true;
+  bool _isloading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 40),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-            const Text(
-              'Don\'t have an account? ',
-                  style: TextStyle(color: Color(0xFF2E3233))),
+          children: [
+            const Text('Don\'t have an account? ',
+                style: TextStyle(color: Color(0xFF2E3233))),
             GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, '/signup');
@@ -41,10 +42,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Text(
                   'Register',
                   style: TextStyle(
-                      color: appTheme.blue200Af, fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                      decorationColor: appTheme.blue200Af,
-                      decorationThickness: 2,),
+                    color: appTheme.blue200Af,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    decorationColor: appTheme.blue200Af,
+                    decorationThickness: 2,
+                  ),
                 ))
           ],
         ),
@@ -55,14 +58,12 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
               Text(
                 'taco',
                 style: TextStyle(
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.bold,
-                  color: appTheme.indigo400
-                ),
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.bold,
+                    color: appTheme.indigo400),
               ),
               const SizedBox(height: 58),
               Form(
@@ -70,10 +71,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Column(
                   children: [
                     ReusableTextFormField(
-                      
                       prefixIcon: Icons.person_outline_rounded,
-                      textController: _username,
-                      labelText: 'Username',
+                      textController: _emailusername,
+                      labelText: 'Username / Email',
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your username';
@@ -83,7 +83,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     SizedBox(height: gap),
                     ReusableTextFormField(
-                      
                       prefixIcon: Icons.lock_outline,
                       textController: _password,
                       labelText: 'Password',
@@ -95,12 +94,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         return null;
                       },
                       onPressed: () {
-                          setState(() {
-                            _hideText =!_hideText;
-                          });
-                        },
-                        mySuffix: _hideText? Icons.visibility_off
-                                : Icons.visibility,
+                        setState(() {
+                          _hideText = !_hideText;
+                        });
+                      },
+                      mySuffix:
+                          _hideText ? Icons.visibility_off : Icons.visibility,
                     ),
                     SizedBox(height: gap),
                     Row(
@@ -113,39 +112,45 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         GestureDetector(
                             onTap: () {
-                            Navigator.pushNamed(context, '/resetpass');
+                              Navigator.pushNamed(context, '/resetpass');
                             },
                             child: Text(
                               'Forgot',
                               style: TextStyle(
-                      color: appTheme.blue200Af, fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                      decorationColor: appTheme.blue200Af,
-                      decorationThickness: 2,),
+                                color: appTheme.blue200Af,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                decorationColor: appTheme.blue200Af,
+                                decorationThickness: 2,
+                              ),
                             ))
                       ],
                     ),
                     SizedBox(height: gap),
-                    ReusableButton(
-                      buttonText: 'LogIn',
-                      onPressed: () {
-                        // Sign in logic
-                        if (_formKey.currentState!.validate()){
-                        siginUser();
-                        }
-                        // siginUser();
-                        
-                      },
-                      buttonColor: appTheme.indigo400,
-                      textColor: appTheme.gray5099,
-                      buttonWidth: 150,
-                      buttonHeight: 40,
-                    ),
-                    
+                    !_isloading
+                        ? ReusableButton(
+                            buttonText: 'LogIn',
+                            onPressed: () {
+                              // Sign in logic
+                              if (_formKey.currentState!.validate()) {
+                                _signIn();
+                              }
+                              // siginUser();
+                            },
+                            buttonColor: appTheme.indigo400,
+                            textColor: appTheme.gray5099,
+                            buttonWidth: 150,
+                            buttonHeight: 40,
+                          )
+                        : Center(
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: appTheme.indigo400,
+                              size: 50,
+                            ),
+                          ),
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -153,42 +158,142 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-siginUser(){
-    String usern='taco';
-    String pass = 'monklobby';
-    String Username = _username.text;
-    String Password = _password.text;
+  // siginUser() {
+  //   String usern = 'taco';
+  //   String pass = 'monklobby';
+  //   String Username = _emailusername.text;
+  //   String Password = _password.text;
 
-    if(Username == usern && Password == pass){
+  //   if (Username == usern && Password == pass) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         // behavior: SnackBarBehavior.floating,
+
+  //         backgroundColor: Colors.transparent,
+  //         elevation: 0,
+  //         content: CustomSnackBarContentSuccess(
+  //           errorText: "Logged In SuceessFully",
+  //         ),
+  //       ),
+  //     );
+  //     Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         // behavior: SnackBarBehavior.floating,
+
+  //         backgroundColor: Colors.transparent,
+  //         elevation: 0,
+  //         content: CustomSnackBarContentError(
+  //           errorText: "The Username and Passsword doesn't Match.",
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  Future<void> _signIn() async {
+    setState(() {
+      _isloading = true;
+    });
+    try {
+      // Get the entered username/email and password
+      String usernameOrEmail = _emailusername.text;
+      String password = _password.text;
+
+      // Check if the entered text is a valid email format
+      bool isEmail = _isEmail(usernameOrEmail);
+
+      // Sign in with email and password 
+      if (isEmail) {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: usernameOrEmail,
+          password: password,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          // behavior: SnackBarBehavior.floating,
+
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentSuccess(
+            errorText: "Logged In SuceessFully",
+          ),
+        ));
+
+        await Future.delayed(Duration(seconds: 2));
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/homepage', (route) => false);
+        print('User signed in with email: ${userCredential.user!.uid}');
+
+      } else {
+        // Query Firestore to find the user with the entered username
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('userData')
+            .where('username', isEqualTo: usernameOrEmail.trim())
+            .limit(1)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          // User found, validate the password
+          DocumentSnapshot userDoc = querySnapshot.docs.first;
+          String email = userDoc.get('email');
+
+          UserCredential userCredential =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            // behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            content: CustomSnackBarContentSuccess(
+              errorText: "Logged In SuceessFully",
+            ),
+          ));
+
+          await Future.delayed(Duration(seconds: 2));
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/homepage', (route) => false);
+
+        } else {
+          // User not found
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              // behavior: SnackBarBehavior.floating,
+
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              content: CustomSnackBarContentError(
+                errorText: "User not found",
+              ),
+            ),
+          );
+          // Handle user not found
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      // Handle sign-in errors
       ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    // behavior: SnackBarBehavior.floating,
-                    
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    content: CustomSnackBarContentSuccess(
-                      errorText:
-                          "Logged In SuceessFully",
-                    ),
-                  ),
-                );
-      Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
-    }
-    else{
-      ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    // behavior: SnackBarBehavior.floating,
-                    
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    content: CustomSnackBarContentError(
-                      errorText:
-                          "The Username and Passsword doesn't Match.",
-                    ),
-                  ),
-                );
+        SnackBar(
+          // behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentError(
+            errorText: e.message.toString(),
+          ),
+        ),
+      );
+    } finally {
+      setState(() {
+        _isloading = false;
+      });
     }
   }
+
+  bool _isEmail(String input) {
+    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(input);
+  }
 }
-
-

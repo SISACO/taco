@@ -6,9 +6,9 @@ String? validateName(String?value){
     return null;
 }
 
-String? validateUsern(String? value){
+String? validatePostal(String? value){
     if (value == null || value.isEmpty) {
-      return 'Username is Required';
+      return 'PostalCode is Required';
     }
     return null;
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class ReusableTextFormField extends StatelessWidget {
   final String labelText;
   final String? Function(String?) validator;
+  final Function(String)? onChanged;
   final TextEditingController textController;
   final TextInputType keyboardType;
   final bool obscureText;
@@ -14,6 +15,7 @@ class ReusableTextFormField extends StatelessWidget {
   final VoidCallback? onPressed;
   // final Function ?onTap;
   final bool isButtonpress;
+  final bool readOnly;
 
   const ReusableTextFormField({
     Key? key,
@@ -27,13 +29,17 @@ class ReusableTextFormField extends StatelessWidget {
     this.borderColor,
     this.mySuffix,
     this.onPressed,
+    this.onChanged,
     // this.onTap,
     this.isButtonpress = false,
+    this.readOnly=false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
+      onChanged: onChanged,
       controller: textController,
       decoration: InputDecoration(
         isDense: true,
