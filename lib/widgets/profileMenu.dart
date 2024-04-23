@@ -24,17 +24,33 @@ class NavDrawer extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     image: AssetImage('assets/taco/TacobgLOGO.jpg'))),
           ),
-    
+ListTile(
+            leading: Icon(Icons.emoji_emotions,color: appTheme.indigo400,),
+            title: Text('Memories'),
+            onTap: () => {},
+          ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: Icon(Icons.emoji_people_sharp,color: appTheme.indigo400,),
+            title: Text('Refer & Earn'),
+            onTap: () => {},
+          ),
+    ListTile(
+            leading: Icon(Icons.settings,color: appTheme.indigo400),
+            title: Text('Settings'),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: Icon(Icons.support_agent,color: appTheme.indigo400,),
+            title: Text('Help & Support'),
+            onTap: () => {},
+          ),
+          
+          ListTile(
+            leading: Icon(Icons.exit_to_app,color: Colors.redAccent),
             title: Text('Logout'),
             onTap: () => {signOut(context)},
           ),
-          ListTile(
-            leading: Icon(Icons.delete_forever),
-            title: Text('Delete Account'),
-            onTap: () => {signOut(context)},
-          ),
+          
         ],
       ),
     );

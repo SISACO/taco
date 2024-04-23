@@ -24,9 +24,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _ispatner = false;
   double gap = 15;
   List _post = [
-    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F5534%2Fscreenshots%2F14230133%2Fprofile_4x.jpg&f=1&nofb=1&ipt=1032dadcc7150effe732ca4c51e37e9b9787252219648872cd05fe94248f6a9c&ipo=images',
+    'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmeencurry.com%2Fwp-content%2Fuploads%2F2015%2F05%2Fwildlife-in-kerala-backwaters.jpg&f=1&nofb=1&ipt=c423324e2118e944b7b2b8e8de66c1f0c2571a6c10e664a93c0b5047c356998f&ipo=images',
     'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fthewowstyle.com%2Fwp-content%2Fuploads%2F2015%2F01%2Fnature-images.jpg&f=1&nofb=1&ipt=cb4fdff0721737b410c6a9896525afc99a4f6e55a6e5bce7d2bcedb5c19dac5f&ipo=images',
-    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F5534%2Fscreenshots%2F14230133%2Fprofile_4x.jpg&f=1&nofb=1&ipt=1032dadcc7150effe732ca4c51e37e9b9787252219648872cd05fe94248f6a9c&ipo=images',
+    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg1.rapidleaks.com%2F2017%2F08%2F7-Places-In-Kerala-That-Are-Must-Visit-In-Monsoon-Season-6.jpg&f=1&nofb=1&ipt=e6779097c11416c118cc46a07ea2a75aa54fdee32f4fa0aa73e7cd1de0246c36&ipo=images',
+    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mediahacker.org%2Fwp-content%2Fuploads%2F2019%2F03%2FKovalam-1.jpg&f=1&nofb=1&ipt=fca1d91ffca4caf4bb661e53124bda66b5cdbfe26a096cfd45461f690a886651&ipo=images'
   ];
   bool isSelected = true;
   List<Room> rooms = generateRooms(10);
@@ -250,7 +251,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F5534%2Fscreenshots%2F14230133%2Fprofile_4x.jpg&f=1&nofb=1&ipt=1032dadcc7150effe732ca4c51e37e9b9787252219648872cd05fe94248f6a9c&ipo=images"),
+                                          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg1.rapidleaks.com%2F2017%2F08%2F7-Places-In-Kerala-That-Are-Must-Visit-In-Monsoon-Season-6.jpg&f=1&nofb=1&ipt=e6779097c11416c118cc46a07ea2a75aa54fdee32f4fa0aa73e7cd1de0246c36&ipo=images"),
                                       fit: BoxFit.fitHeight),
                                   color: appTheme.whiteA700,
                                   shape: BoxShape.circle,
@@ -265,7 +266,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F5534%2Fscreenshots%2F14230133%2Fprofile_4x.jpg&f=1&nofb=1&ipt=1032dadcc7150effe732ca4c51e37e9b9787252219648872cd05fe94248f6a9c&ipo=images"),
+                                          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mediahacker.org%2Fwp-content%2Fuploads%2F2019%2F03%2FKovalam-1.jpg&f=1&nofb=1&ipt=fca1d91ffca4caf4bb661e53124bda66b5cdbfe26a096cfd45461f690a886651&ipo=images"),
                                       fit: BoxFit.fitHeight),
                                   color: appTheme.whiteA700,
                                   shape: BoxShape.circle,
@@ -318,18 +319,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             itemCount: _post.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
+                              crossAxisCount: 3,childAspectRatio: 1/1,
                             ),
+                            
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
                                   // Handle tap on the post
                                   // Navigate to post details, etc.
                                 },
-                                child: Image.network(
-                                  _post[index], // URL of the post image
-                                  fit: BoxFit
-                                      .cover, // Adjust the image size to cover the space
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Image.network(
+                                    _post[index], // URL of the post image
+                                    fit: BoxFit
+                                        .cover, // Adjust the image size to cover the space
+                                  ),
                                 ),
                               );
                             })
