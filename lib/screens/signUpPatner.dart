@@ -541,18 +541,41 @@ class _SignUpScreenState extends State<SignUpPatner> {
   Future<Position?> getLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location Services are Disabled');
+      return Future.error(
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          // behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentError(errorText: 'Location Services are Disabled'),
+        ),
+      )
+      );
     }
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        return Future.error(ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          // behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentError(errorText:'Location permissions are denied'),
+        ),
+      ));
       }
     }
     if (permission == LocationPermission.deniedForever) {
       return Future.error(
-          'Location permissions are permanently denied, we cannot request');
+          ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          // behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentError(errorText: 'Location permissions are permanently denied'),
+        ),
+      ));
     }
     return await Geolocator.getCurrentPosition();
   }

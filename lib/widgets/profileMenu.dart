@@ -28,6 +28,11 @@ class NavDrawer extends StatelessWidget {
             title: Text('Logout'),
             onTap: () => {signOut(context)},
           ),
+          ListTile(
+            leading: Icon(Icons.delete_forever),
+            title: Text('Delete Account'),
+            onTap: () => {signOut(context)},
+          ),
         ],
       ),
     );

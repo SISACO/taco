@@ -158,40 +158,6 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  // siginUser() {
-  //   String usern = 'taco';
-  //   String pass = 'monklobby';
-  //   String Username = _emailusername.text;
-  //   String Password = _password.text;
-
-  //   if (Username == usern && Password == pass) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         // behavior: SnackBarBehavior.floating,
-
-  //         backgroundColor: Colors.transparent,
-  //         elevation: 0,
-  //         content: CustomSnackBarContentSuccess(
-  //           errorText: "Logged In SuceessFully",
-  //         ),
-  //       ),
-  //     );
-  //     Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         // behavior: SnackBarBehavior.floating,
-
-  //         backgroundColor: Colors.transparent,
-  //         elevation: 0,
-  //         content: CustomSnackBarContentError(
-  //           errorText: "The Username and Passsword doesn't Match.",
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
-
   Future<void> _signIn() async {
     setState(() {
       _isloading = true;
