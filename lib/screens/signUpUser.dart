@@ -10,7 +10,6 @@ import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Success.dart';
 import 'package:Taco/widgets/policy_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 

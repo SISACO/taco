@@ -204,7 +204,7 @@ class _SignInScreenState extends State<SignInScreen> {
       // Check if the entered text is a valid email format
       bool isEmail = _isEmail(usernameOrEmail);
 
-      // Sign in with email and password 
+      // Sign in with email and password
       if (isEmail) {
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -225,7 +225,6 @@ class _SignInScreenState extends State<SignInScreen> {
         Navigator.pushNamedAndRemoveUntil(
             context, '/homepage', (route) => false);
         print('User signed in with email: ${userCredential.user!.uid}');
-
       } else {
         // Query Firestore to find the user with the entered username
         QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -256,7 +255,6 @@ class _SignInScreenState extends State<SignInScreen> {
           await Future.delayed(Duration(seconds: 2));
           Navigator.pushNamedAndRemoveUntil(
               context, '/homepage', (route) => false);
-
         } else {
           // User not found
           ScaffoldMessenger.of(context).showSnackBar(
@@ -274,15 +272,20 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       }
     } on FirebaseAuthException catch (e) {
+      String errormsg = e.message.toString();
+      if (errormsg.length >= 87) {
+        errormsg = errormsg.substring(8, errormsg.length - 16);
+      }
+      if (errormsg.length >= 68) {
+        errormsg = errormsg.substring(0, errormsg.length - 26);
+      }
       // Handle sign-in errors
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           // behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          content: CustomSnackBarContentError(
-            errorText: e.message.toString(),
-          ),
+          content: CustomSnackBarContentError(errorText: errormsg),
         ),
       );
     } finally {
