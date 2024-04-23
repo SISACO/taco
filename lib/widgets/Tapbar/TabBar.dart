@@ -15,6 +15,7 @@ AppBar tabBar(BuildContext context) {
         style: TextStyle(fontWeight: FontWeight.w900, color: appTheme.indigo400)),
 
     bottom: TabBar(
+      
       indicatorPadding: EdgeInsets.only(left: 18,right: 18,bottom: 3),
       labelColor: appTheme.indigo400,
       unselectedLabelColor:appTheme.blue200Af,

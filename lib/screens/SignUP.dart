@@ -14,6 +14,7 @@ class SignUpScreen extends StatelessWidget {
         child: Scaffold(
           appBar: tabBar(context),
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: [
               SignUpUser(),SignUpPatner()
             ],

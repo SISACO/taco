@@ -1,5 +1,3 @@
-import 'package:Taco/reuse/NavBar.dart';
-import 'package:Taco/screens/CommunityPage.dart';
 import 'package:Taco/screens/HomePage.dart';
 import 'package:Taco/screens/SignIN.dart';
 import 'package:Taco/screens/SignUP.dart';
@@ -32,7 +30,7 @@ class MyApp extends StatelessWidget {
          Theme.of(context).textTheme,
        ),
       ),
-      home: const SignInScreen(),
+      home: const AuthGate(),
       routes: {
         '/homepage':(context) => HomeScreen(),
         '/signin':(context) => SignInScreen(),
@@ -44,5 +42,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

@@ -48,14 +48,14 @@ sendOtp(TextEditingController emailcontroller, BuildContext context) async {
 }
 
 String? verify(String? value,) {
-  if (value == null || value.isEmpty) {
-    return 'OTP is required';
-  }
-  if (value.length != 6) {
-    return 'OTP contain 6 characters';
-  }
-  if (myAuth.verifyOTP(otp: value) != true) {
-    return 'Invaild OTP';
-  }
+  // if (value == null || value.isEmpty) {
+  //   return 'OTP is required';
+  // }
+  // if (value.length != 6) {
+  //   return 'OTP contain 6 characters';
+  // }
+  // if (myAuth.verifyOTP(otp: value) != true) {
+  //   return 'Invaild OTP';
+  // }
   return null;
 }
