@@ -1,6 +1,8 @@
 import 'package:Taco/screens/CommunityPage.dart';
 import 'package:Taco/screens/HomePage.dart';
 import 'package:Taco/screens/ProfilePage.dart';
+import 'package:Taco/screens/locationdetails.dart';
+
 import 'package:Taco/screens/shopping.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class tacoNavbar extends StatefulWidget {
 
 class _tacoNavbarState extends State<tacoNavbar> {
   var _selectIndex = 0;
-  List tabWidget = <Widget>[CommunityPage(),HomeScreen(),ShoppingScreen(),ProfileScreen()];
+  List tabWidget = <Widget>[CommunityPage(),LocationMap(),HomeScreen(),ShoppingScreen(),ProfileScreen()];
 
 
 

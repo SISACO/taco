@@ -4,14 +4,13 @@
     <application
         android:label="Taco"
         android:name="${applicationName}"
-<<<<<<< HEAD
+
         android:icon="@mipmap/launcher_icon">
-=======
-        android:icon="@mipmap/ic_launcher">
+
+        android:icon="@mipmap/ic_launcher"
          <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyBAOUOgTTl35q0g3sKjCsOPDF40Vj3Eay0"/>
                
->>>>>>> 2f99a1e0a535a845350dd34efb198b5fed368fdd
         <activity
             android:name=".MainActivity"
             android:exported="true"
