@@ -1,15 +1,56 @@
 import 'dart:math';
 Random random = Random();
-List  title = ['Single', 'Double','Twin XL','Sofa Bed','Rollaway Bed'];
-List prices = [1000.0, 1500.0, 2500.0,3000.0,5000.0,850.0];
-List dates = [
-  DateTime(2022, 5, 20),
-  DateTime(2022, 4, 20),
-  DateTime(2022, 5, 22),
-  DateTime(2022, 4, 21),
-  DateTime(2022, 4, 22),
-  DateTime(2022, 4, 23),
+
+List<String> bedTypes = ['Single', 'Double','Twin XL','Sofa Bed',];
+List<String> imageUrls = [
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Z_Q09xr_RWyU44-BV1VctAHaFY%26pid%3DApi&f=1&ipt=45591eabe418fbf0d8174a241031e7280adc8fa6bb4cd458a8ccd34d979033f4&ipo=images',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.eUmRjpZOz3-yqS_-wEwRPQHaE8%26pid%3DApi&f=1&ipt=47e26272d71314fe0fd1cfafc9ed561777aaad907f2352d86169637426df98c0&ipo=images',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Yi9Cvg7fxkXk5ORrAjXcmAHaFN%26pid%3DApi&f=1&ipt=14fc3b1490abad76c2c65315134c301e70193553ff40f08826a9e347c0b9feab&ipo=images',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.t0iYeW_ZBz69hcqabOnYtwHaFj%26pid%3DApi&f=1&ipt=0e66915a81921d15722732f7bcbc951f1daae00cd6333b1f69ff4e93e0064f95&ipo=images',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP._XuZby4A43FdQhGGOy_avwHaEK%26pid%3DApi&f=1&ipt=48b6365267cf252af375d3395cd5c4ff5ecc888cf0a153fe225174d2725abdf7&ipo=images',
+  // Add more image URLs as needed
 ];
+List<double> prices = [1000.0, 1500.0, 2500.0,3000.0,5000.0,850.0]; 
+List<String> dates = [
+  '2022, 4, 20',
+ '2022, 4, 25',
+  '2022, 4, 22',
+]; // Example dates
+List<String> statuses = ['Booked','Available'];
+List<double> reviews = [1,2,3,4,5]; // Example reviews
+
+class Room {
+  final String bedType;
+  final double price;
+  final String date;
+  final String status;
+  final double review;
+  final String imageUrl;
+
+
+  Room({
+    required this.bedType,
+    required this.price,
+    required this.date,
+    required this.status,
+    required this.review,
+     required this.imageUrl,
+  });
+}
+
+List<Room> generateRooms(int count) {
+  return List.generate(count, (index) {
+    return Room(
+      bedType: bedTypes[random.nextInt(bedTypes.length)],
+      price: prices[random.nextInt(prices.length)],
+      date: dates[random.nextInt(dates.length)],
+      status: statuses[random.nextInt(statuses.length)],
+      review: reviews[random.nextInt(reviews.length)],
+      imageUrl: imageUrls[random.nextInt(imageUrls.length)],
+    );
+  });
+}
+
 List names = [
   "Ling Waldner",
   "Gricelda Barrera",
@@ -99,12 +140,6 @@ List conversation = List.generate(10, (index)=>{
 List friends = List.generate(13, (index)=>{
   "name": names[random.nextInt(10)],
   "dp": "assets/cm${random.nextInt(10)}.jpeg",
-  "status": "Anything could be here",
-  "isAccept": random.nextBool(),
-});
-List services = List.generate(13, (index)=>{
-  "title": names[random.nextInt(10)],
-  "image": "assets/cm${random.nextInt(10)}.jpeg",
   "status": "Anything could be here",
   "isAccept": random.nextBool(),
 });

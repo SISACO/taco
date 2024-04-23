@@ -1,6 +1,7 @@
 import 'package:Taco/screens/CommunityPage.dart';
 import 'package:Taco/screens/HomePage.dart';
 import 'package:Taco/screens/ProfilePage.dart';
+import 'package:Taco/screens/shopping.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,12 +16,8 @@ class tacoNavbar extends StatefulWidget {
 }
 
 class _tacoNavbarState extends State<tacoNavbar> {
-<<<<<<< HEAD
   var _selectIndex = 0;
-=======
-  var _selectIndex = 1;
->>>>>>> 96e770238db27e2f015cc4ba1e03c76c107d802e
-  List tabWidget = <Widget>[CommunityPage(),HomeScreen(),ProfileScreen()];
+  List tabWidget = <Widget>[CommunityPage(),HomeScreen(),ShoppingScreen(),ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {

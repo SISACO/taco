@@ -1,6 +1,5 @@
-
-
 import 'package:Taco/reuse/button.dart';
+import 'package:Taco/sampleData/Data.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Error.dart';
 import 'package:Taco/widgets/profileMenu.dart';
@@ -30,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F5534%2Fscreenshots%2F14230133%2Fprofile_4x.jpg&f=1&nofb=1&ipt=1032dadcc7150effe732ca4c51e37e9b9787252219648872cd05fe94248f6a9c&ipo=images',
   ];
   bool isSelected = true;
-
+  List<Room> rooms = generateRooms(10);
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
@@ -49,9 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _ispatner = data["ispatner"];
             return Scaffold(
               endDrawer: NavDrawer(),
-              
               appBar: AppBar(
-                
                   elevation: 2,
                   backgroundColor: appTheme.whiteA700,
                   title: Padding(
@@ -71,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  
+
                   // actions: <Widget>[
                   //   Padding(
                   //     padding: const EdgeInsets.only(right: 8),
@@ -83,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //         size: 38,
                   //       ),
                   //       onPressed: () {
-                          
+
                   //       },
                   //     ),
                   //   ),
@@ -351,8 +348,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 );
                               },
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
+                              itemBuilder: (BuildContext context, index) {
+                                
+                                return SizedBox(
                                   height: 140,
                                   width: double.infinity,
                                   child: Row(
@@ -365,7 +363,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: NetworkImage(
-                                                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F5534%2Fscreenshots%2F14230133%2Fprofile_4x.jpg&f=1&nofb=1&ipt=1032dadcc7150effe732ca4c51e37e9b9787252219648872cd05fe94248f6a9c&ipo=images"),
+                                                  rooms[index].imageUrl),
                                               fit: BoxFit.fitHeight),
                                           color: appTheme.whiteA700,
                                           shape: BoxShape.rectangle,
@@ -377,7 +375,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          Text('Single Bed',
+                                          Text(rooms[index].bedType,
                                               style: GoogleFonts.poppins(
                                                   textStyle: TextStyle(
                                                       fontSize: 18,
@@ -385,7 +383,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       fontWeight:
                                                           FontWeight.w500))),
                                           Flexible(
-                                            child: Text('Price: 2000/-',
+                                            child: Text(
+                                                rooms[index].price.toString(),
                                                 style: GoogleFonts.poppins(
                                                     textStyle: TextStyle(
                                                         fontSize: 14,
@@ -400,7 +399,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           fontSize: 15,
                                                           color: appTheme
                                                               .black900))),
-                                              Text('Booked',
+                                              Text(rooms[index].status,
                                                   style: GoogleFonts.poppins(
                                                       textStyle: TextStyle(
                                                           fontSize: 15,
@@ -408,7 +407,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                               Colors.green))),
                                             ],
                                           ),
-                                          Text('date',
+                                          Text(rooms[index].date,
                                               style: GoogleFonts.poppins(
                                                   textStyle: TextStyle(
                                                       fontSize: 12,
@@ -417,8 +416,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           RatingBar.builder(
                                             itemSize: 20,
                                             ignoreGestures: true,
-                                            initialRating: 3,
-                                            minRating: 1,
+                                            initialRating: rooms[index].review,
+                                            minRating: rooms[index].review,
                                             direction: Axis.horizontal,
                                             allowHalfRating: true,
                                             itemCount: 5,
@@ -447,9 +446,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 activeColor: appTheme.indigo400,
                                                 value: isSelected,
                                                 onChanged: (value1) {
-                                                  setState(() {
-                                                    isSelected = value1;
-                                                  });
+                                                  
+                                                    // setState(() {
+                                                    //   isSelected = value1;
+                                                    // });
+                                                  
                                                 },
                                               ),
                                             ),
@@ -474,7 +475,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 );
                               },
-                              itemCount: 5,
+                              itemCount: rooms.length,
                             ),
                           )
                   ],
