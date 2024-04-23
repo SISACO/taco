@@ -1,5 +1,15 @@
 import 'dart:math';
 Random random = Random();
+List  title = ['Single', 'Double','Twin XL','Sofa Bed','Rollaway Bed'];
+List prices = [1000.0, 1500.0, 2500.0,3000.0,5000.0,850.0];
+List dates = [
+  DateTime(2022, 5, 20),
+  DateTime(2022, 4, 20),
+  DateTime(2022, 5, 22),
+  DateTime(2022, 4, 21),
+  DateTime(2022, 4, 22),
+  DateTime(2022, 4, 23),
+];
 List names = [
   "Ling Waldner",
   "Gricelda Barrera",
@@ -89,6 +99,12 @@ List conversation = List.generate(10, (index)=>{
 List friends = List.generate(13, (index)=>{
   "name": names[random.nextInt(10)],
   "dp": "assets/cm${random.nextInt(10)}.jpeg",
+  "status": "Anything could be here",
+  "isAccept": random.nextBool(),
+});
+List services = List.generate(13, (index)=>{
+  "title": names[random.nextInt(10)],
+  "image": "assets/cm${random.nextInt(10)}.jpeg",
   "status": "Anything could be here",
   "isAccept": random.nextBool(),
 });

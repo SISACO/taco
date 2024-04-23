@@ -15,7 +15,11 @@ class tacoNavbar extends StatefulWidget {
 }
 
 class _tacoNavbarState extends State<tacoNavbar> {
+<<<<<<< HEAD
+  var _selectIndex = 0;
+=======
   var _selectIndex = 1;
+>>>>>>> 96e770238db27e2f015cc4ba1e03c76c107d802e
   List tabWidget = <Widget>[CommunityPage(),HomeScreen(),ProfileScreen()];
 
   @override
