@@ -4,6 +4,7 @@ import 'package:Taco/screens/locationdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:Taco/screens/map.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
