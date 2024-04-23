@@ -1,11 +1,13 @@
 import 'package:Taco/screens/HomePage.dart';
 import 'package:Taco/screens/SignIN.dart';
 import 'package:Taco/screens/SignUP.dart';
+import 'package:Taco/screens/locationpage.dart';
+import 'package:Taco/screens/locationdetails.dart';
+import 'package:Taco/screens/map.dart';
 import 'package:Taco/screens/resetPass.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +21,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Taco',
@@ -28,13 +29,11 @@ class MyApp extends StatelessWidget {
       ),
       home: const SignInScreen(),
       routes: {
-        '/homepage':(context) => HomeScreen(),
-        '/signin':(context) => SignInScreen(),
-        '/signup':(context) => SignUpScreen(),
-        '/resetpass':(context) => ResetPassScrn(),
+        '/homepage': (context) => HomeScreen(),
+        '/signin': (context) => SignInScreen(),
+        '/signup': (context) => SignUpScreen(),
+        '/resetpass': (context) => ResetPassScrn(),
       },
     );
   }
 }
-
-
