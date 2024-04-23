@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:Taco/reuse/NavBar.dart';
+import 'package:Taco/sampleData/Data.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,7 +27,6 @@ class _CommunityPageState extends State<CommunityPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 70,
@@ -79,10 +79,9 @@ class _CommunityPageState extends State<CommunityPage> {
         body: Container(
           margin: EdgeInsets.all(10),
           child: ListView(
-            
+            shrinkWrap: true,
             physics: AlwaysScrollableScrollPhysics(),
             children: [
-            
               Container(
                 width: 250,
                 height: 180,
@@ -94,7 +93,9 @@ class _CommunityPageState extends State<CommunityPage> {
                   children: [
                     Text(
                       "You both have same intrests",
-                      style: TextStyle(fontWeight: FontWeight.bold,color: appTheme.BlackTrans),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: appTheme.BlackTrans),
                     ),
                     SizedBox(
                       height: 10,
@@ -177,6 +178,80 @@ class _CommunityPageState extends State<CommunityPage> {
                     )
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 70,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: appTheme.blue200Af.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Looking for new connections?",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: appTheme.indigo400),
+                      ),
+                      SizedBox(
+                        width: 115,
+                      ),
+                      SvgPicture.asset(
+                        "assets/icons/person-plus-circle-fill-svgrepo-com.svg",
+                        color: appTheme.indigo400,
+                        height: 50,
+                        width: 50,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'Your Communities',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: appTheme.black900),
+                    ),
+                    SizedBox(
+                      width: 150,
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.more_vert,
+                        size: 30,
+                        color: appTheme.blue200Af,
+                      ),
+                      hoverColor: appTheme.gray5099,
+                    )
+                  ],
+                ),
+              ),
+              ListView.builder(
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: chats.length,
+                itemBuilder: (context, index) {
+                  return conversation(
+                      'https://via.placeholder.com/150',
+                      chats[index]['name'],
+                      chats[index]['msg'],
+                      chats[index]['time'],
+                      chats[index]["isOnline"]);
+                },
               )
             ],
           ),
@@ -301,5 +376,70 @@ class _CommunityPageState extends State<CommunityPage> {
     //     ],
     //   ),
     // );
+  }
+
+  Widget conversation(
+      String url, String name, String message, String time, bool messageSeen) {
+    return InkWell(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(url),
+              radius: 25.0,
+            ),
+            SizedBox(
+              width: 8.0,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Text(time),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(child: Text(message)),
+                      if (messageSeen)
+                        Icon(
+                          Icons.check_circle,
+                          size: 16.0,
+                          color: Colors.green,
+                        ),
+                      if (!messageSeen)
+                        Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.grey,
+                          size: 16.0,
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

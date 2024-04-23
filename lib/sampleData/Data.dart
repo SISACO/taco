@@ -59,7 +59,7 @@ List posts = List.generate(13, (index)=>{
 
 List chats = List.generate(13, (index)=>{
   "name": names[random.nextInt(10)],
-  "dp": "assets/cm${random.nextInt(10)}.jpeg",
+  "dp": "assets/images/${random.nextInt(10)}.jpg",
   "msg": messages[random.nextInt(10)],
   "counter": random.nextInt(20),
   "time": "${random.nextInt(50)} min ago",

@@ -1,6 +1,7 @@
 
 
 import 'package:Taco/reuse/button.dart';
+import 'package:Taco/sampleData/Data.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Error.dart';
 import 'package:Taco/widgets/profileMenu.dart';
@@ -37,8 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         stream: getUserDataStream(uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return LoadingAnimationWidget.beat(
-                color: appTheme.indigo400, size: 30);
+            return Center(
+              child: LoadingAnimationWidget.beat(
+                  color: appTheme.indigo400, size: 30),
+            );
           }
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -448,7 +451,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 value: isSelected,
                                                 onChanged: (value1) {
                                                   setState(() {
-                                                    isSelected = value1;
+                                                    isSelected = groups[index]["isOnline"];
                                                   });
                                                 },
                                               ),

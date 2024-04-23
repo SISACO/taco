@@ -36,7 +36,7 @@ class _tacoNavbarState extends State<tacoNavbar> {
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                   _selectIndex == 0
-                      ? 'assets/icons/group-icon.svg'
+                      ? 'assets/icons/group-icon-filled.svg'
                       : 'assets/icons/group-icon.svg',
                   width: 30),
               label: '',
