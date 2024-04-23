@@ -1,9 +1,12 @@
+import 'package:Taco/reuse/NavBar.dart';
+import 'package:Taco/screens/CommunityPage.dart';
 import 'package:Taco/screens/HomePage.dart';
 import 'package:Taco/screens/SignIN.dart';
 import 'package:Taco/screens/SignUP.dart';
 import 'package:Taco/screens/resetPass.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
 
 
@@ -25,6 +28,9 @@ class MyApp extends StatelessWidget {
       title: 'Taco',
       theme: ThemeData(
         useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(
+         Theme.of(context).textTheme,
+       ),
       ),
       home: const SignInScreen(),
       routes: {
@@ -32,6 +38,8 @@ class MyApp extends StatelessWidget {
         '/signin':(context) => SignInScreen(),
         '/signup':(context) => SignUpScreen(),
         '/resetpass':(context) => ResetPassScrn(),
+        '/community':(context) => CommunityPage(),
+        '/taconavbar':(context) => tacoNavbar(),
       },
     );
   }

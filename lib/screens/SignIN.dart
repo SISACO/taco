@@ -154,8 +154,8 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
 siginUser(){
-    String usern='taco';
-    String pass = 'monklobby';
+    String usern='1234';
+    String pass = '1234';
     String Username = _username.text;
     String Password = _password.text;
 
@@ -172,7 +172,7 @@ siginUser(){
                     ),
                   ),
                 );
-      Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/taconavbar', (route) => false);
     }
     else{
       ScaffoldMessenger.of(context).showSnackBar(
