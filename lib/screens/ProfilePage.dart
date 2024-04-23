@@ -447,18 +447,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               child: Switch(
                                                 activeColor: appTheme.indigo400,
                                                 value: isSelected,
-                                                onChanged: (value1) {
-<<<<<<< HEAD
-                                                  
+                                                onChanged: (value1) {                                                  
                                                     // setState(() {
                                                     //   isSelected = value1;
-                                                    // });
-                                                  
-=======
-                                                  setState(() {
-                                                    isSelected = groups[index]["isOnline"];
-                                                  });
->>>>>>> 4f59f58dffd8787c46c52304e643247a93bc37e3
+                                                    // }
                                                 },
                                               ),
                                             ),
