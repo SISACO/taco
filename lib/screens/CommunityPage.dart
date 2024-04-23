@@ -26,6 +26,7 @@ class _CommunityPageState extends State<CommunityPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 70,

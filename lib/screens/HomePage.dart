@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: tacoNavbar(),
         body: RefreshIndicator(
           color: appTheme.indigo400,
           onRefresh: _pullRefresh,

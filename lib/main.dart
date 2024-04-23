@@ -1,4 +1,5 @@
 import 'package:Taco/screens/HomePage.dart';
+import 'package:Taco/screens/ProfilePage.dart';
 import 'package:Taco/screens/SignIN.dart';
 import 'package:Taco/screens/SignUP.dart';
 import 'package:Taco/screens/resetPass.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/resetpass':(context) => ResetPassScrn(),
         '/community':(context) => CommunityPage(),
         '/taconavbar':(context) => tacoNavbar(),
+        '/profilescreen':(context)=> ProfileScreen()
       },
     );
   }

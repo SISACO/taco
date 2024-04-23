@@ -1,3 +1,4 @@
+import 'package:Taco/reuse/NavBar.dart';
 import 'package:Taco/screens/HomePage.dart';
 import 'package:Taco/screens/ProfilePage.dart';
 import 'package:Taco/screens/SignIN.dart';
@@ -16,7 +17,7 @@ class AuthGate extends StatelessWidget {
           return const SignInScreen();
         }
 
-        return HomeScreen();
+        return tacoNavbar();
       },
     );
   }
@@ -25,5 +26,5 @@ class AuthGate extends StatelessWidget {
 Future<void> signOut(BuildContext context) async {
   await FirebaseAuth.instance
       .signOut()
-      .then((value) => Navigator.pushNamed(context, '/signin'));
+      .then((value) => Navigator.pushNamed(context, '/taconavbar'));
 }
