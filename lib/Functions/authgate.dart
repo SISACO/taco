@@ -26,9 +26,5 @@ class AuthGate extends StatelessWidget {
 Future<void> signOut(BuildContext context) async {
   await FirebaseAuth.instance
       .signOut()
-<<<<<<< HEAD
       .then((value) => Navigator.pushNamedAndRemoveUntil(context, '/signin', (route) => false));
-=======
-      .then((value) => Navigator.pushNamed(context, '/taconavbar'));
->>>>>>> 96e770238db27e2f015cc4ba1e03c76c107d802e
 }
