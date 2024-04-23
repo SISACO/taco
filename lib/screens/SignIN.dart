@@ -189,7 +189,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
         await Future.delayed(Duration(seconds: 2));
         Navigator.pushNamedAndRemoveUntil(
-            context, '/homepage', (route) => false);
+            context, '/taconavbar', (route) => false);
         print('User signed in with email: ${userCredential.user!.uid}');
       } else {
         // Query Firestore to find the user with the entered username
@@ -220,7 +220,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
           await Future.delayed(Duration(seconds: 2));
           Navigator.pushNamedAndRemoveUntil(
-              context, '/homepage', (route) => false);
+              context, '/taconavbar', (route) => false);
         } else {
           // User not found
           ScaffoldMessenger.of(context).showSnackBar(
