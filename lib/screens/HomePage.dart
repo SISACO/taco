@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:Taco/sampleData/Data.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

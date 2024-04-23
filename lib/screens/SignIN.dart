@@ -3,6 +3,8 @@ import 'package:Taco/reuse/textform.dart';
 import 'package:Taco/theme/theme_helper.dart';
 import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Error.dart';
 import 'package:Taco/widgets/customSnackbar/CustomSnackBarContent_Success.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -162,34 +164,134 @@ class _SignInScreenState extends State<SignInScreen> {
   //   String Username = _emailusername.text;
   //   String Password = _password.text;
 
-    if(Username == usern && Password == pass){
+  //   if (Username == usern && Password == pass) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         // behavior: SnackBarBehavior.floating,
+
+  //         backgroundColor: Colors.transparent,
+  //         elevation: 0,
+  //         content: CustomSnackBarContentSuccess(
+  //           errorText: "Logged In SuceessFully",
+  //         ),
+  //       ),
+  //     );
+  //     Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         // behavior: SnackBarBehavior.floating,
+
+  //         backgroundColor: Colors.transparent,
+  //         elevation: 0,
+  //         content: CustomSnackBarContentError(
+  //           errorText: "The Username and Passsword doesn't Match.",
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  Future<void> _signIn() async {
+    setState(() {
+      _isloading = true;
+    });
+    try {
+      // Get the entered username/email and password
+      String usernameOrEmail = _emailusername.text;
+      String password = _password.text;
+
+      // Check if the entered text is a valid email format
+      bool isEmail = _isEmail(usernameOrEmail);
+
+      // Sign in with email and password
+      if (isEmail) {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: usernameOrEmail,
+          password: password,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          // behavior: SnackBarBehavior.floating,
+
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentSuccess(
+            errorText: "Logged In SuceessFully",
+          ),
+        ));
+
+        await Future.delayed(Duration(seconds: 2));
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/homepage', (route) => false);
+        print('User signed in with email: ${userCredential.user!.uid}');
+      } else {
+        // Query Firestore to find the user with the entered username
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('userData')
+            .where('username', isEqualTo: usernameOrEmail.trim())
+            .limit(1)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          // User found, validate the password
+          DocumentSnapshot userDoc = querySnapshot.docs.first;
+          String email = userDoc.get('email');
+
+          UserCredential userCredential =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            // behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            content: CustomSnackBarContentSuccess(
+              errorText: "Logged In SuceessFully",
+            ),
+          ));
+
+          await Future.delayed(Duration(seconds: 2));
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/homepage', (route) => false);
+        } else {
+          // User not found
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              // behavior: SnackBarBehavior.floating,
+
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              content: CustomSnackBarContentError(
+                errorText: "User not found",
+              ),
+            ),
+          );
+          // Handle user not found
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      String errormsg = e.message.toString();
+      if (errormsg.length >= 87) {
+        errormsg = errormsg.substring(8, errormsg.length - 16);
+      }
+      if (errormsg.length >= 68) {
+        errormsg = errormsg.substring(0, errormsg.length - 26);
+      }
+      // Handle sign-in errors
       ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    // behavior: SnackBarBehavior.floating,
-                    
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    content: CustomSnackBarContentSuccess(
-                      errorText:
-                          "Logged In SuceessFully",
-                    ),
-                  ),
-                );
-      Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
-    }
-    else{
-      ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    // behavior: SnackBarBehavior.floating,
-                    
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    content: CustomSnackBarContentError(
-                      errorText:
-                          "The Username and Passsword doesn't Match.",
-                    ),
-                  ),
-                );
+        SnackBar(
+          // behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          content: CustomSnackBarContentError(errorText: errormsg),
+        ),
+      );
+    } finally {
+      setState(() {
+        _isloading = false;
+      });
     }
   }
 

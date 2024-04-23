@@ -5,8 +5,10 @@ import 'package:Taco/screens/resetPass.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:Taco/reuse/NavBar.dart';
+import 'package:Taco/screens/CommunityPage.dart';
 import 'firebase_options.dart';
-
+import 'package:Taco/Functions/authgate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
