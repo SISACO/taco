@@ -104,6 +104,7 @@ SvgPicture.asset(
                                   imageUrl: 'https://via.placeholder.com/150',
                                   size: 60),
                               Text(
+                              
                                 notifications[index]["name"],
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
@@ -183,11 +184,15 @@ SvgPicture.asset(
                           ),
                         ),
                         Container(
+                          
                           decoration: BoxDecoration(
+                            
                               color: appTheme.indigo400,
                               borderRadius: BorderRadius.circular(10)),
                           height: 200,
                           width: 350,
+                          
+                          child: Image.asset("assets/taco/TacobgLOGO.jpg", fit: BoxFit.scaleDown,),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15, left: 15),

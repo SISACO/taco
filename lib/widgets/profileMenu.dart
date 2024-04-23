@@ -8,6 +8,8 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      
+      
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -22,7 +24,7 @@ class NavDrawer extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     image: AssetImage('assets/taco/TacobgLOGO.jpg'))),
           ),
-
+    
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),

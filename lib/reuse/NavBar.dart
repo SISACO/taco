@@ -17,7 +17,11 @@ class tacoNavbar extends StatefulWidget {
 
 class _tacoNavbarState extends State<tacoNavbar> {
   var _selectIndex = 0;
+<<<<<<< HEAD
   List tabWidget = <Widget>[CommunityPage(),HomeScreen(),ShoppingScreen(),ProfileScreen()];
+=======
+  List tabWidget = <Widget>[CommunityPage(),HomeScreen(),ProfileScreen()];
+>>>>>>> 4f59f58dffd8787c46c52304e643247a93bc37e3
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class _tacoNavbarState extends State<tacoNavbar> {
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                   _selectIndex == 0
-                      ? 'assets/icons/group-icon.svg'
+                      ? 'assets/icons/group-icon-filled.svg'
                       : 'assets/icons/group-icon.svg',
                   width: 30),
               label: '',

@@ -36,8 +36,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         stream: getUserDataStream(uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return LoadingAnimationWidget.beat(
-                color: appTheme.indigo400, size: 30);
+            return Center(
+              child: LoadingAnimationWidget.beat(
+                  color: appTheme.indigo400, size: 30),
+            );
           }
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -446,11 +448,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 activeColor: appTheme.indigo400,
                                                 value: isSelected,
                                                 onChanged: (value1) {
+<<<<<<< HEAD
                                                   
                                                     // setState(() {
                                                     //   isSelected = value1;
                                                     // });
                                                   
+=======
+                                                  setState(() {
+                                                    isSelected = groups[index]["isOnline"];
+                                                  });
+>>>>>>> 4f59f58dffd8787c46c52304e643247a93bc37e3
                                                 },
                                               ),
                                             ),
