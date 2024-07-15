@@ -1,16 +1,23 @@
-# Taco
+<h1 align="center" id="title">Taco • (Travel Companion)</h1>
 
-A new Flutter project.
+<p align="center"><img src="https://github.com/SISACO/taco/blob/main/WhatsApp%20Image%202024-05-02%20at%2000.22.06_2781ad8a.jpg" alt="project-image" width="150px" height="150px" style= "border-radius:{100%}"></p>
 
-## Getting Started
+<p align="center" id="description">A simple traveller medium application built using flutter framework</p>
 
-This project is a starting point for a Flutter application.
+<p align="center"><img src="https://img.shields.io/github/all-contributors/all-contributors/all-contributors?style=social" alt="shields"></p>
 
-A few resources to get you started if this is your first Flutter project:
+<h2>Project Screenshots:</h2>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="https://github.com/SISACO/taco/blob/main/readme/Screenshot%202024-05-20%20223119.png" alt="project-screenshot" width="100%" height="100%">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/SISACO/taco/blob/main/readme/Screenshot%202024-07-15%20224805.png" alt="project-screenshot" width="100%" height="100%">
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   Flutter
+*   Dart
+*   Firebase
